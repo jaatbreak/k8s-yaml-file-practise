@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-app-deploy
+  namespace: prod-ns
+  labels:
+    env: prod
+spec:
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      name: php-app-deploy
+      labels:
+        env: prod
+    spec:
+      containers:
+      - name: php-app
+        image: amansingh12/shopping_page:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "500Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+
+
+---
+
+#service file 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-app-service
+  namespace: prod-ns
+spec:
+  selector:
+    env: prod
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP 
+

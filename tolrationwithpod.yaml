@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prod-pod
+  namespace: default
+spec:
+  containers:
+  - name: prod-pod
+    image: nginx:latest 
+    ports:
+    - containerPort: 80
+  tolerations:
+  - key: "env"
+    operator: "Equal"
+    value: "prod"
+    effect: "NoSchedule"
+

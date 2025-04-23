@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-pod
+  namespace: default
+spec:
+  containers:
+  - name: nginx-pod
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    command: ["sh","-c","touch /tmp/health_file && sleep 10 && rm -rf  /tmp/health_file && sleep 3600"]
+    resources:
+      limits:
+        cpu: "500m"
+        memory: "500Mi"
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
+    livenessProbe:
+      exec:
+        command: ["cat", "/tmp/health_file"]
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      failureThreshold: 3 

@@ -1,0 +1,31 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Minikube & Kubernetes config
+.minikube/
+.kube/
+
+# Git and other system folders
+.git/
+.idea/
+*.swp
+*.swo
+

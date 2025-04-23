@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: default
+  labels:
+    app: nginx 
+spec:
+  nodeName: minikube-m02 
+  containers:
+  - name: nginx-pod
+    image: nginx:latest 
+    ports:
+    - containerPort: 80
+    

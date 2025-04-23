@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-dev-env
+  namespace: default
+  labels:
+    app: dev
+spec:
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      name: daemonset-dev-env
+      labels:
+        app: dev
+    spec:
+      containers:
+        - name: daemonset-dev-env
+          image: quay.io/fluentd_elasticsearch/fluentd:v2.5.2
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "200Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          volumeMounts:
+            - name: my-volume
+              mountPath: /var/log
+      volumes:
+        - name: my-volume
+          hostPath:
+            path: /var/log
+
